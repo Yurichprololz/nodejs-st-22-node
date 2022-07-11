@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-st-22-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "task1": "npx nodemon src/task1.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yurichprololz/nodejs-st-22-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yurichprololz/nodejs-st-22-node/issues"
+  },
+  "homepage": "https://github.com/Yurichprololz/nodejs-st-22-node#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
