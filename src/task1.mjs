@@ -1,6 +1,6 @@
 
-const { EOL } = require('os');
-const { Transform } = require("stream");
+import { EOL } from 'os';
+import { Transform } from "stream";
 
 const reverseString = new Transform({
   transform(chunk, encoding, callback) {
@@ -9,4 +9,5 @@ const reverseString = new Transform({
   },
 });
 
+console.log('Write your text:')
 process.stdin.pipe(reverseString).pipe(process.stdout)
