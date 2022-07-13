@@ -1,10 +1,9 @@
 import csv from 'csvtojson'
 import { createReadStream, createWriteStream } from 'fs'
 import { join } from 'path'
-import { Transform } from "stream";
 
-const pathToCSV = join(__dirname, '../', 'csv', 'data.txt')
-const pathToJSON = join(__dirname, '../', 'csv', 'data.json')
+const pathToCSV = join(__dirname, '../', 'csv', 'nodejs-hw1-ex1.csv')
+const pathToJSON = join(__dirname, '../', 'csv', 'data.txt')
 
 const readStream = createReadStream(pathToCSV);
 const writeStream = createWriteStream(pathToJSON);
@@ -17,20 +16,26 @@ writeStream.on('error', (err) => {
   console.error(err.message)
 })
 
-// Some issues with trailing comma. source: https://github.com/Keyang/node-csvtojson/issues/333
-const JSONtransform = new Transform({
-  transform(chunk, encoding, cb) {
+const toLowerHead = (fileLine, idx) => {
+  if (idx === 0) return fileLine.toLowerCase(); 
+  return fileLine;
+}
 
-    this.push((this.isNotAtFirstRow ? ',' : '[') + chunk.toString('utf-8').slice(0, -1));
-    this.isNotAtFirstRow = true;
-    cb();
-  },
-  flush(cb) {
-    const isEmpty = (!this.isNotAtFirstRow);
-    this.push(isEmpty ? '[]' : ']');
-    cb();
+const toFloat = (fileLine) => {
+  const float = fileLine.replace(',', '.')
+  return parseFloat(float);
+}
+
+const option = {
+  checkType: true,
+  downstreamFormat: 'line',
+  delimiter: ';',
+  colParser: {
+    "price": toFloat,
   }
-});
+}
 
-
-readStream.pipe(csv()).pipe(JSONtransform).pipe(writeStream);
+readStream
+  .pipe(csv(option))
+  .preFileLine(toLowerHead)
+  .pipe(writeStream);
