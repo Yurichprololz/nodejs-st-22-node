@@ -1,4 +1,4 @@
-csv/*.json
+csv/data.txt
 # Logs
 logs
 *.log
