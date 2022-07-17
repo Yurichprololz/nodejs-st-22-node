@@ -17,7 +17,7 @@ writeStream.on('error', (err) => {
 })
 
 const toLowerHead = (fileLine, idx) => {
-  if (idx === 0) return fileLine.toLowerCase(); 
+  if (idx === 0) return fileLine.toLowerCase();
   return fileLine;
 }
 
@@ -32,6 +32,7 @@ const option = {
   delimiter: ';',
   colParser: {
     "price": toFloat,
+    "amount": "omit",
   }
 }
 
