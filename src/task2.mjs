@@ -32,6 +32,7 @@ const option = {
   delimiter: ';',
   colParser: {
     "price": toFloat,
+    "amount": "omit",
   }
 }
 
